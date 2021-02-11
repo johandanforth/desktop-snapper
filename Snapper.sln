@@ -17,6 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{88967781-1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{BA6DAB62-E541-43A6-864A-109841F66F71}"
+	ProjectSection(SolutionItems) = preProject
+		images\player.png = images\player.png
+		images\settings.png = images\settings.png
+		images\toolbar.PNG = images\toolbar.PNG
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{92F4CD1D-7CDE-4099-B8BB-9B87BAA124DE}"
 	ProjectSection(SolutionItems) = preProject
