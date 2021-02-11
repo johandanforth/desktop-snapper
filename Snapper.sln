@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{BA6DAB
 	ProjectSection(SolutionItems) = preProject
 		images\player.png = images\player.png
 		images\settings.png = images\settings.png
-		images\toolbar.PNG = images\toolbar.PNG
+		images\toolbar.png = images\toolbar.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{92F4CD1D-7CDE-4099-B8BB-9B87BAA124DE}"
