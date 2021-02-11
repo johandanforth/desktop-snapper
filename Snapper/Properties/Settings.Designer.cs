@@ -25,7 +25,7 @@ namespace Snapper.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("c:\\TimSnapper")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\desktop-snapper")]
         public string ScreenShotsDirectory {
             get {
                 return ((string)(this["ScreenShotsDirectory"]));

@@ -77,7 +77,11 @@ namespace Snapper
             
             //start client idle hook
             _clientIdleHandler = new ClientIdleHandler();
+#if NO_HOOKS
+            //if debugging other parts of program and no hooks are necessary
+#else
             _clientIdleHandler.Start();
+#endif
         }
 
         protected override void OnStateChanged(EventArgs e)
@@ -103,10 +107,12 @@ namespace Snapper
                     this.Close();
             }
 
+#if !NO_HOOKS
             if (_clientIdleHandler.IsActive)    //indicates user is active
             {
                 //zero the idle counters
                 _clientIdleHandler.IsActive = false;
+#endif
                 try
                 {
                     var snapper = new ScreenSnapper();
@@ -114,7 +120,8 @@ namespace Snapper
                     if(Settings.Default.Screen == "Primary Screen")
                     {
                         snapper.SnapScreenAndSave(Settings.Default.ScreenShotsDirectory +
-                            "/" + DateTime.Now.ToString("yyyy-MM-dd"), Screen.PrimaryScreen, ImageFormat.Jpeg, Settings.Default.ScreenShotsResolution);
+                            "/" + DateTime.Now.ToString("yyyy-MM-dd"), Screen.PrimaryScreen, ImageFormat.Jpeg, 
+                            Settings.Default.ScreenShotsResolution);
 
                     }
                     else if(Settings.Default.Screen == "All Screens")
@@ -129,7 +136,7 @@ namespace Snapper
                     }
                     else
                     {
-                        MessageBox.Show("Ops, kunde inte hämta upp vilken skärm du vill använda för screenshots, kör med 'Primary Screen' så länge. Ändra i settings om du vill :)");
+                        MessageBox.Show("Ops, could not figure out which screen to use for screenshots, going with 'Primary Screen'.");
                         Settings.Default.Screen = "Primary Screen";
                         Settings.Default.Save();
                     }
@@ -137,15 +144,17 @@ namespace Snapper
                 }
                 catch (Exception snapException)
                 {
-                    System.Windows.MessageBox.Show("Fel vid sparning av bild: " + snapException.Message);
+                    System.Windows.MessageBox.Show("Exception while saving screenshot: " + snapException.Message);
                 }
 
                 Debug.Print(DateTime.Now + " - " + "Active");
+#if !NO_HOOKS
             }
             else    //user was idle the last second
             {
                 Debug.Print(DateTime.Now + " - " + "Idle");
             }
+#endif
         }
 
         private void GridMouseDown(object sender, MouseButtonEventArgs e)
@@ -168,7 +177,7 @@ namespace Snapper
             if (!Directory.Exists(Settings.Default.ScreenShotsDirectory))
                 Directory.CreateDirectory(Settings.Default.ScreenShotsDirectory);
 
-            RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            RegistryKey rkApp = Registry.CurrentUser.OpenSubKey($@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
             if(Settings.Default.AutoStart)
             {
@@ -195,8 +204,8 @@ namespace Snapper
         {
             var res =
                 System.Windows.MessageBox.Show(
-                    "Är du säker på att du vill avsluta programmet? Inga bilder kommer tas mer.",
-                    "Stänga programmet?",
+                    "Are you sure you want to exit the program? No more screenshots will be saved!",
+                    "Close program?",
                     MessageBoxButton.OKCancel,
                     MessageBoxImage.Question);
 

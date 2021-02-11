@@ -55,26 +55,26 @@
             // 
             this.timeReportGroup.Items.Add(this.PlayerButton);
             this.timeReportGroup.Items.Add(this.SettingsButton);
-            this.timeReportGroup.Label = "TIM Snapper";
+            this.timeReportGroup.Label = "desktop-snapper";
             this.timeReportGroup.Name = "timeReportGroup";
             // 
             // PlayerButton
             // 
             this.PlayerButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.PlayerButton.Image = ((System.Drawing.Image)(resources.GetObject("PlayerButton.Image")));
-            this.PlayerButton.Label = "Vad gjorde jag då?";
+            this.PlayerButton.Label = "What did I do?";
             this.PlayerButton.Name = "PlayerButton";
-            this.PlayerButton.ScreenTip = "Visa vad du gjorde på detta datum";
+            this.PlayerButton.ScreenTip = "Show what you did at the selected calendar date";
             this.PlayerButton.ShowImage = true;
             this.PlayerButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.PlayerButtonClick);
             // 
             // SettingsButton
             // 
             this.SettingsButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.SettingsButton.Label = "Inställningar";
+            this.SettingsButton.Label = "Settings";
             this.SettingsButton.Name = "SettingsButton";
             this.SettingsButton.OfficeImageId = "ControlsGallery";
-            this.SettingsButton.ScreenTip = "Inställningar för Tim Snapper";
+            this.SettingsButton.ScreenTip = "Settings for desktop-snapper";
             this.SettingsButton.ShowImage = true;
             this.SettingsButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.SettingsButtonClick);
             // 

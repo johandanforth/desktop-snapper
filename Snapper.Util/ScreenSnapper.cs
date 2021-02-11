@@ -103,7 +103,7 @@ namespace Snapper.Util
                 catch (Exception saveException)
                 {
 
-                    //MessageBox.Show("Fel vid SaveJpeg()" + saveException.Message);
+                    //todo: handle exception?
                     /*
                     var eventLog = new EventLog { Source = "Snapper" };
                     eventLog.WriteEntry("Fel vid SaveJpeg():" + saveException.Message + "\n\n" + saveException.StackTrace,

@@ -10,8 +10,7 @@ using System.Security;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Tim Snapper")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
+[assembly: AssemblyProduct("desktop-snapper")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

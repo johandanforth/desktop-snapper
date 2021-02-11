@@ -92,7 +92,7 @@ namespace Snapper
             if (Directory.Exists(savePath + selectedDate))
             {
                 _images = Directory.GetFiles(savePath + selectedDate);
-                Debug.Print("images: " + _images.Length);
+                Debug.Print("images count: " + _images.Length);
 
                 var imglist = _images.Select(Path.GetFileNameWithoutExtension).ToList();
 
@@ -105,13 +105,10 @@ namespace Snapper
 
                 for (int i = 0; i < slots; i++)
                 {
-
                     var time = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, firstHour, 0, 0);
                     time = time.AddSeconds(i * 10);
 
-
                     var value = time.ToShortTimeString().Substring(0, 5);
-                    //value = value.Replace(":", "-");
                     if (value.EndsWith("00") && _label == false)
                     {
                         var tb = new Label { Content = value, Margin = new Thickness(0, 15, 0, 0) };
@@ -136,7 +133,7 @@ namespace Snapper
                                            };
 
 
-                        var file = _images.Where(l => l.Contains(value)).First();
+                        var file = _images.First(l => l.Contains(value));
                         slotRect.DataContext = file;
                         slotRect.MouseEnter += BorderMouseEnter;
                         slotRect.Stroke = new SolidColorBrush(Colors.RoyalBlue);
@@ -203,12 +200,12 @@ namespace Snapper
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            /* test för att markera datum som har data i sig
+            /* TODO: Mark dates in the calendar that actually has data
             var range = new CalendarDateRange(new DateTime(2011, 1, 1), new DateTime(2011, 6, 26));
             MyCalendar.BlackoutDates.Add(range);
             */
 
-            DirInfo.Content = "Läser från " + Settings.Default.ScreenShotsDirectory;
+            DirInfo.Content = "snap-folder: " + Settings.Default.ScreenShotsDirectory;
             ShowDate(DateTime.Now.ToShortDateString());
 
         }
@@ -226,7 +223,7 @@ namespace Snapper
                 Settings.Default.ScreenShotsDirectory = dlg.SelectedPath;
                 Settings.Default.Save();
             }
-            DirInfo.Content = "Läser från " + Settings.Default.ScreenShotsDirectory;
+            DirInfo.Content = "snap-folder: " + Settings.Default.ScreenShotsDirectory;
             DrawSlots(_selectedDate);
         }
     }
