@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icons\Main.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Snapper.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Icons\folder.png" />
+    <Content Include="Icons\Main.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Icons\WhatDidIDo.png" />
+    <Resource Include="Images\backGround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons\SystemTray.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Snapper.Util\Snapper.Util.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+</Project>

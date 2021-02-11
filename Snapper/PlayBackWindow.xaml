@@ -1,0 +1,35 @@
+﻿<Window x:Class="Snapper.PlayBackWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Snapper - Vad gjorde jag då?" Height="396" Width="687" SizeChanged="WindowSizeChanged" Loaded="WindowLoaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" >
+            <Calendar Name="MyCalendar" Margin="5" IsTodayHighlighted="False" SelectedDatesChanged="MyCalendarSelectedDatesChanged"></Calendar>
+            <TextBlock TextWrapping="Wrap" Margin="5,50,5,5" Width="200">Tryck ner vänster musknapp och dra över aktivitetsbandet nedan för att se vad du gjorde på ett visst klockslag.</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <Label Name="DirInfo">DirInfo</Label>
+                <Image Source="Icons/folder.png" MouseLeftButtonUp="FolderClick"></Image>
+            </StackPanel>
+
+        </StackPanel>
+        <Grid Name="SnapshotGrid" Grid.Column="1">
+            <Image Name="Snapshot" />
+            <Label Name="Time2" FontSize="40" Foreground="Black">00:00</Label>
+            <Label Name="Time1" FontSize="40" Foreground="Chartreuse">00:00</Label>
+        </Grid>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" >
+            <Canvas Name="Slots" Background="Beige" Height="40" />
+        </StackPanel>
+
+    </Grid>
+</Window>
