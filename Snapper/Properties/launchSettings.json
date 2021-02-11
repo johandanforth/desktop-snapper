@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Snapper": {
+      "commandName": "Project",
+      "commandLineArgs": "/minimized"
+    }
+  }
+}

@@ -70,9 +70,9 @@ namespace Snapper
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            if(App.Command != null)
+            if(App.Arguments != null && App.Arguments.Length > 0)
             {
-                ProcessCommandLineArgs(App.Command, App.Argument);
+                ProcessCommandLineArgs(App.Arguments);
             }
             
             //start client idle hook
@@ -242,37 +242,45 @@ namespace Snapper
             //if (_notifyIcon != null) _notifyIcon.Dispose();
         }
 
-        public bool ProcessCommandLineArgs(string command, string argument)
+        public bool ProcessCommandLineArgs(string[] args)
         {
-            StoreHostProcessName(argument);
+            StoreHostProcessName(args);
 
-            switch (command)
+            foreach (var arg in args)
             {
-                case "/show":
-                    WindowState = WindowState.Normal;
-                    Show();
-                    Focus();
-                    Activate();
-                    break;
-                case "/minimized":
-                    WindowState = WindowState.Minimized;
-                    Hide();
-                break;
+                switch (arg)
+                {
+                    case "/show":
+                        WindowState = WindowState.Normal;
+                        Show();
+                        Focus();
+                        Activate();
+                        break;
+                    case "/minimized":
+                        WindowState = WindowState.Minimized;
+                        Hide();
+                        break;
+                }
             }
+            
 
             return true;
         }
 
-        private void StoreHostProcessName(string argument)
+        private void StoreHostProcessName(string[] argument)
         {
-            if (argument != null)
+            if (argument != null && argument.Length > 0)
             {
-                var arg = argument.ToLowerInvariant();
-                if (arg.StartsWith("/host:"))
+                foreach (var a in argument)
                 {
-                    if (arg.IndexOf(":", StringComparison.Ordinal) > 0)
-                        _hostProcessName = arg.Substring(arg.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
+                    var arg = a.ToLowerInvariant();
+                    if (arg.StartsWith("/host:"))
+                    {
+                        if (arg.IndexOf(":", StringComparison.Ordinal) > 0)
+                            _hostProcessName = arg.Substring(arg.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
+                    }
                 }
+               
             }
         }
     }

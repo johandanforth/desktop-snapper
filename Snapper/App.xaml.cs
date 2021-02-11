@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 //using Microsoft.Shell;
 
@@ -13,35 +14,35 @@ namespace Snapper
     public partial class App : Application
     {
 
-        public static string Command;
-        public static string Argument;
+        //public static string Command;
+        //public static string Argument;
+        public static string[] Arguments;
 
-        //[STAThread]
-        //private static void Main(string[] args)
-        //{
-        //    if (!SingleInstance<App>.InitializeAsFirstInstance("Snapper.App")) return;
+        static readonly Mutex SnapperRunningMutex = new Mutex(true, "{1F6F0AC4-B1A2-21fd-A8CF-72F04E6BDE8F}");
 
-        //    if (args.Length > 0)
-        //        Command = args[0].ToLowerInvariant();
-        //    if (args.Length > 1)
-        //        Argument = args[1].ToLowerInvariant();
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            Arguments = e.Args;
+            //var args = e.Args;
 
-        //    var app = new App();
-        //    app.InitializeComponent();
-        //    app.Run();
-        //    SingleInstance<App>.Cleanup();
-        //}
+            //if (args.Length > 0)
+            //    Command = args[0].ToLowerInvariant();
+            //if (args.Length > 1)
+            //    Argument = args[1].ToLowerInvariant();
 
-        //bool ISingleInstanceApp.SignalExternalCommandLineArgs(IList<string> args)
-        //{
-        //    if (args.Count == 1)
-        //        return ((MainWindow) MainWindow).ProcessCommandLineArgs(args[1].ToLowerInvariant(), null);
-            
-        //    if (args.Count > 1)
-        //        return ((MainWindow) MainWindow).ProcessCommandLineArgs(args[1].ToLowerInvariant(), args[2]);
+            if (SnapperRunningMutex.WaitOne(TimeSpan.Zero, true))
+            {
+                //program is not started
+                SnapperRunningMutex.ReleaseMutex();
+            }
+            else
+            {
+                //program is already running
+                Application.Current.Shutdown();
+            }
 
-        //    return true;
-            
-        //}
+            base.OnStartup(e);
+        }
+
     }
 }
