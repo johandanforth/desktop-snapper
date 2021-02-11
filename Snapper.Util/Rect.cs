@@ -10,14 +10,7 @@ namespace Snapper.Util
         public int Right;
         public int Bottom;
 
-        public int Width
-        {
-            get { return Right - Left; }
-        }
-
-        public int Height
-        {
-            get { return Bottom - Top; }
-        }
+        public int Width => Right - Left;
+        public int Height => Bottom - Top;
     }
 }

@@ -11,6 +11,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snapper.Tests", "Snapper.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snapper.Util", "Snapper.Util\Snapper.Util.csproj", "{6D88AA91-F558-4A26-9C3F-A977E6B8189E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{88967781-12CB-462E-B3D7-DFABA584933F}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{BA6DAB62-E541-43A6-864A-109841F66F71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{92F4CD1D-7CDE-4099-B8BB-9B87BAA124DE}"
+	ProjectSection(SolutionItems) = preProject
+		kill-snapper.cmd = kill-snapper.cmd
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

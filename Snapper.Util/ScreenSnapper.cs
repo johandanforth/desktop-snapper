@@ -43,7 +43,7 @@ namespace Snapper.Util
 
         public void SnapActiveWindowAndSave(string imagePath, ImageFormat imageFormat, int qualityPercent)
         {
-            var activeWindowInfo = new WindowSpy().GetActiveWindow();
+            var activeWindowInfo = new WindowFuncs().GetActiveWindow();
             var bounds = activeWindowInfo.Bounds;
             _bounds = bounds;
             _imagePath = imagePath;
@@ -69,6 +69,8 @@ namespace Snapper.Util
                     }
                     catch (Exception snapException)
                     {
+                        //TODO: Handle exceptions?
+
                         /*
                         if (!EventLog.SourceExists("Snapper"))
                         {

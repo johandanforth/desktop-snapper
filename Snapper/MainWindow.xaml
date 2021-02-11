@@ -8,7 +8,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         KeyDown="AppKeyDown"
-        Title="Snapper" Height="385" Width="572" Closing="Window_Closing">
+        Title="Snapper" Height="310" Width="650" Closing="Window_Closing">
     <Window.Resources>
         <!-- Settings -->
         <local:Settings x:Key="Settings" />
@@ -40,26 +40,25 @@
             </Rectangle>
 
             <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Bottom" 
-                       FontSize="26" FontWeight="Bold" Foreground="Coral" Text="Snapper" />
+                       FontSize="26" FontWeight="Bold" Foreground="Coral" Text="desktop-snapper" />
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Foreground="#FFD1D1D1" 
                           Grid.Column="0" Grid.Row="1" Margin="10,10,10,10" FontSize="14" >
-                <Run Text="Snapper hjälper dig minnas vad du gjorde på din dator genom att ta skärmbilder och spara undan dem så att du kan spela upp dem senare, som en film."/><LineBreak/>
-                <Run Text="version 2" />
+                <Run Text="desktop-snapper helps you remember what you did on your computer by taking desktop 'snaps' and save them for you to play back later as a video."/><LineBreak/>
             </TextBlock>
 
             <Button Margin="20, 80, 20, 20" Grid.Column="0" Grid.Row="1" IsDefault="True" Padding="5" Click="PlayerButtonClick" 
-                    Foreground="DarkBlue" FontSize="16" FontWeight="Bold" Height="40" Width="120">Filmspelare</Button>
+                    Foreground="DarkBlue" FontSize="16" FontWeight="Bold" Height="40" Width="120">Player</Button>
 
             <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Bottom" 
-                       FontSize="16" FontWeight="Bold" Foreground="Coral" Text="Inställningar" />
+                       FontSize="16" FontWeight="Bold" Foreground="Coral" Text="Settings" />
 
             <StackPanel Grid.Column="1" Grid.Row="1" Margin="5">
                 <StackPanel Orientation="Horizontal" >
-                    <Label Content="Katalog:"  Foreground="#FFD1D1D1" Width="80" HorizontalAlignment="Right" FontWeight="Bold" />
+                    <Label Content="Snap folder:"  Foreground="#FFD1D1D1" Width="100" HorizontalAlignment="Right" FontWeight="Bold" />
                     <TextBox Margin="1" Width="170" Text="{Binding Path=Default.ScreenShotsDirectory}" IsReadOnly="True" MouseDoubleClick="TextBoxMouseDoubleClick" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                    <Label Content="Intervall:"  Foreground="#FFD1D1D1" Width="80" HorizontalAlignment="Right" FontWeight="Bold" />
+                    <Label Content="Interval:"  Foreground="#FFD1D1D1" Width="100" HorizontalAlignment="Right" FontWeight="Bold" />
                     <ComboBox Margin="1" SelectedValue="{Binding Path=Default.ScreenShotsInterval}" 
                          ItemsSource="{Binding Source={StaticResource interval}}" Width="50">
                         <ComboBox.ItemTemplate>
@@ -70,15 +69,15 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Label Content="sekunder"  Foreground="#FFD1D1D1" Width="80" HorizontalAlignment="Right" FontWeight="Bold" />
+                    <Label Content="secs"  Foreground="#FFD1D1D1" Width="100" HorizontalAlignment="Right" FontWeight="Bold" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                    <Label Content="Autostarta:"  Foreground="#FFD1D1D1" Width="80" HorizontalAlignment="Right" FontWeight="Bold" />
-                    <RadioButton Margin="5" GroupName="AutoStart" Foreground="#FFD1D1D1" Width="40" HorizontalAlignment="Right" FontWeight="Bold" IsChecked="{Binding Path=Default.AutoStart}" >Ja</RadioButton>
-                    <RadioButton Margin="5" GroupName="AutoStart" Foreground="#FFD1D1D1" Width="40" HorizontalAlignment="Right" FontWeight="Bold" >Nej</RadioButton>
+                    <Label Content="Autostart:"  Foreground="#FFD1D1D1" Width="100" HorizontalAlignment="Right" FontWeight="Bold" />
+                    <RadioButton Margin="5" GroupName="AutoStart" Foreground="#FFD1D1D1" Width="40" HorizontalAlignment="Right" FontWeight="Bold" IsChecked="{Binding Path=Default.AutoStart}" >Yes</RadioButton>
+                    <RadioButton Margin="5" GroupName="AutoStart" Foreground="#FFD1D1D1" Width="40" HorizontalAlignment="Right" FontWeight="Bold" >No</RadioButton>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                    <Label Content="Skärm:"  Foreground="#FFD1D1D1" Width="80" HorizontalAlignment="Right" FontWeight="Bold" />
+                    <Label Content="Snap screen:"  Foreground="#FFD1D1D1" Width="100" HorizontalAlignment="Right" FontWeight="Bold" />
                     <ComboBox Margin="1" SelectedValue="{Binding Path=Default.Screen}" 
                          ItemsSource="{Binding Source={StaticResource screens}}" Width="144">
                         <ComboBox.ItemTemplate>
@@ -91,7 +90,7 @@
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                    <Label Content="Bildkvalité:"  Foreground="#FFD1D1D1" Width="80" HorizontalAlignment="Right" FontWeight="Bold" />
+                    <Label Content="Snap quality:"  Foreground="#FFD1D1D1" Width="100" HorizontalAlignment="Right" FontWeight="Bold" />
                     <ComboBox Margin="1" SelectedValue="{Binding Path=Default.ScreenShotsResolution}" 
                          ItemsSource="{Binding Source={StaticResource interval}}" Width="50">
                         <ComboBox.ItemTemplate>
@@ -106,7 +105,7 @@
                 </StackPanel>
 
                 <Button Margin="20" Grid.Column="1" Grid.Row="1" IsDefault="True" Padding="5" Click="SaveButtonClick" 
-                    Foreground="DarkGreen" FontSize="16" FontWeight="Bold" Height="40" Width="82">Spara</Button>
+                    Foreground="DarkGreen" FontSize="16" FontWeight="Bold" Height="40" Width="120">Save Settings</Button>
             </StackPanel>
 
             <Button Grid.Column="1" Grid.Row="0" Margin="0,-55,45,0"  Width="30" IsCancel="True" Height="30" 

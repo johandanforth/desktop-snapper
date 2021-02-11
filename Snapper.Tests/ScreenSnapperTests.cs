@@ -17,7 +17,7 @@ namespace Snapper.Tests
         public void SnapMainScreen()
         {
             var ss = new ScreenSnapper();
-            ss.SnapAllScreensAndSave(@"C:\temp", ImageFormat.Jpeg, 50);
+            ss.SnapAllScreensAndSave(Path.GetTempPath(), ImageFormat.Jpeg, 50);
             Thread.Sleep(1000);
         }
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Snapper.Util
 {
-    public class WindowSpy
+    public class WindowFuncs
     {
         [DllImport("user32.dll")]
         static extern IntPtr GetForegroundWindow();
