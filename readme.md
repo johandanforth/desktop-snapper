@@ -22,7 +22,7 @@ The code is built with c# and the .NetFramework 4.7.2.
 
 If the addin is installed, the program opens up when Outlook is started.
 The taskbar buttons are visible only in the Calendar view:
-![toolbar!](images/toolbar.png "toolbar")
+![toolbar!](images/outlook-toolbar.png "toolbar")
 
 First time the addin is started, the settings dialog shows:
 ![settings!](images/settings.png "settings")
