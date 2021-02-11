@@ -9,6 +9,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Snapper.App</StartupObject>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>DEBUG;TRACE;NO_HOOKS</DefineConstants>

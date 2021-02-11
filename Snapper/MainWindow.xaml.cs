@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
@@ -27,34 +30,39 @@ namespace Snapper
     public partial class MainWindow : Window
     {
 
-        //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        //public static extern bool SetForegroundWindow(IntPtr hWnd);
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
 
         private DispatcherTimer _dispatcherTimer;
         private ClientIdleHandler _clientIdleHandler;
         private string _hostProcessName;
-        //private readonly NotifyIcon _notifyIcon;
+        private readonly NotifyIcon _notifyIcon;
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            _notifyIcon.Dispose();
+
+            base.OnClosing(e);
+        }
 
         public MainWindow()
         {
             InitializeComponent();
             Loaded += WindowLoaded;
 
-            /*
-            var icon = new Icon("Icons/SystemTray.ico");
-
             _notifyIcon = new NotifyIcon
-                      {
-                          Icon = icon,
-                          Visible = true,
-                      };
+            {
+                Icon = new Icon("Icons/SystemTray.ico"),
+                Visible = true,
+                Text = "desktop-snapper"
+            };
             _notifyIcon.DoubleClick += (s, a) =>
                                   {
                                       Show();
                                       WindowState = WindowState.Normal;
                                   };
 
-            */
+            
             Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
 
             StartScreenShotTimer();
