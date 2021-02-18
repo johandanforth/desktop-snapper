@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Windows;
 //using Microsoft.Shell;
@@ -25,7 +27,12 @@ namespace Snapper
         protected override void OnStartup(StartupEventArgs e)
         {
             Arguments = e.Args;
-           
+
+            Directory.SetCurrentDirectory((Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ??
+                                           Path.GetDirectoryName(Assembly.GetAssembly(typeof(App)).CodeBase)) ?? 
+                                          Path.GetFullPath(".")
+                                          );
+
             if (SnapperRunningMutex.WaitOne(TimeSpan.Zero, true))
             {
                 //program is not started
