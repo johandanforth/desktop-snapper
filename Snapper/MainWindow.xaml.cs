@@ -62,7 +62,7 @@ namespace Snapper
                                       WindowState = WindowState.Normal;
                                   };
 
-            
+
             Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
 
             StartScreenShotTimer();
@@ -70,19 +70,27 @@ namespace Snapper
 
         private void StartScreenShotTimer()
         {
-            _dispatcherTimer = new DispatcherTimer();
+            if (_dispatcherTimer != null )
+            {
+                _dispatcherTimer.Stop();
+                _dispatcherTimer = null;
+            }
+
+            _dispatcherTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(Settings.Default.ScreenShotsInterval)
+            };
             _dispatcherTimer.Tick += TimerTick;
-            _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, Settings.Default.ScreenShotsInterval);
             _dispatcherTimer.Start();
         }
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            if(App.Arguments != null && App.Arguments.Length > 0)
+            if (App.Arguments != null && App.Arguments.Length > 0)
             {
                 ProcessCommandLineArgs(App.Arguments);
             }
-            
+
             //start client idle hook
             _clientIdleHandler = new ClientIdleHandler();
 #if NO_HOOKS
@@ -102,13 +110,15 @@ namespace Snapper
                 Focus();
                 Activate();
             }
-           
+
             base.OnStateChanged(e);
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
-            if(_hostProcessName != null)
+            Trace.TraceInformation(DateTime.Now + " tick...");
+            
+            if (_hostProcessName != null)
             {
                 var outlookRunning = Process.GetProcessesByName(_hostProcessName).Any();
                 if (!outlookRunning)
@@ -118,26 +128,29 @@ namespace Snapper
 #if !NO_HOOKS
             if (_clientIdleHandler.IsActive)    //indicates user is active
             {
+                
                 //zero the idle counters
                 _clientIdleHandler.IsActive = false;
+                _clientIdleHandler.Start();
+
 #endif
                 try
                 {
                     var snapper = new ScreenSnapper();
 
-                    if(Settings.Default.Screen == "Primary Screen")
+                    if (Settings.Default.Screen == "Primary Screen")
                     {
                         snapper.SnapScreenAndSave(Settings.Default.ScreenShotsDirectory +
-                            "/" + DateTime.Now.ToString("yyyy-MM-dd"), Screen.PrimaryScreen, ImageFormat.Jpeg, 
+                            "/" + DateTime.Now.ToString("yyyy-MM-dd"), Screen.PrimaryScreen, ImageFormat.Jpeg,
                             Settings.Default.ScreenShotsResolution);
 
                     }
-                    else if(Settings.Default.Screen == "All Screens")
+                    else if (Settings.Default.Screen == "All Screens")
                     {
                         snapper.SnapAllScreensAndSave(Settings.Default.ScreenShotsDirectory +
                             "/" + DateTime.Now.ToString("yyyy-MM-dd"), ImageFormat.Jpeg, Settings.Default.ScreenShotsResolution);
                     }
-                    else if(Settings.Default.Screen == "Active Window")
+                    else if (Settings.Default.Screen == "Active Window")
                     {
                         snapper.SnapActiveWindowAndSave(Settings.Default.ScreenShotsDirectory +
                             "/" + DateTime.Now.ToString("yyyy-MM-dd"), ImageFormat.Jpeg, Settings.Default.ScreenShotsResolution);
@@ -163,6 +176,7 @@ namespace Snapper
                 Debug.Print(DateTime.Now + " - " + "Idle");
             }
 #endif
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private void GridMouseDown(object sender, MouseButtonEventArgs e)
@@ -187,7 +201,7 @@ namespace Snapper
 
             RegistryKey rkApp = Registry.CurrentUser.OpenSubKey($@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
-            if(Settings.Default.AutoStart)
+            if (Settings.Default.AutoStart)
             {
                 rkApp.SetValue("Snapper", Assembly.GetExecutingAssembly().Location + " /minimized");
             }
@@ -234,9 +248,9 @@ namespace Snapper
         private void TextBoxMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var dlg = new FolderBrowserDialog
-                          {
-                              SelectedPath = Settings.Default.ScreenShotsDirectory
-                          };
+            {
+                SelectedPath = Settings.Default.ScreenShotsDirectory
+            };
 
             var result = dlg.ShowDialog(this.GetIWin32Window());
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -270,7 +284,7 @@ namespace Snapper
                         break;
                 }
             }
-            
+
 
             return true;
         }
@@ -288,7 +302,7 @@ namespace Snapper
                             _hostProcessName = arg.Substring(arg.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
                     }
                 }
-               
+
             }
         }
     }

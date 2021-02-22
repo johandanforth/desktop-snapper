@@ -44,8 +44,10 @@ namespace Snapper.Util
 
         public int MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
+            Trace.TraceInformation(DateTime.Now + " mouse active");
             //user is active, at least with the mouse
             IsActive = true;
+            Close();
 
             //just return the next hook
             return CallNextHookEx(_hHookMouse, nCode, wParam, lParam);
@@ -53,8 +55,10 @@ namespace Snapper.Util
 
         public int KbdHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
+            Trace.TraceInformation(DateTime.Now + " kbd active");
             //user is active, at least with the keyboard
             IsActive = true;
+            Close();
 
             //just return the next hook
             return CallNextHookEx(_hHookKbd, nCode, wParam, lParam);
