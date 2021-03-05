@@ -5,7 +5,7 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Main.ico</ApplicationIcon>
+    <ApplicationIcon>Icons\Main.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Snapper.App</StartupObject>
@@ -21,6 +21,11 @@
     </Content>
     <Resource Include="Icons\WhatDidIDo.png" />
     <Resource Include="Images\backGround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons\SystemTray.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Snapper.Util\Snapper.Util.csproj" />
