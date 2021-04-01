@@ -6,41 +6,51 @@ namespace Snapper.Util
 {
     public class ClientIdleHandler : IDisposable
     {
+        public delegate int HookProc(int nCode, IntPtr wParam, IntPtr lParam);
+
+        public enum HookType
+        {
+            GlobalKeyboard = 13,
+            GlobalMouse = 14
+        }
+
+        private int _hHookKbd;
+        private int _hHookMouse;
         public bool IsActive { get; set; }
 
-        int _hHookKbd;
-        int _hHookMouse;
+        #region IDisposable Members
 
-        public delegate int HookProc(int nCode, IntPtr wParam, IntPtr lParam);
+        public void Dispose()
+        {
+            if (_hHookMouse != 0 || _hHookKbd != 0)
+                Close();
+        }
+
+        #endregion
+
         public event HookProc MouseHookProcedure;
         public event HookProc KbdHookProcedure;
 
         //Use this function to install thread-specific hook.
         [DllImport("user32.dll", CharSet = CharSet.Auto,
-             CallingConvention = CallingConvention.StdCall)]
+            CallingConvention = CallingConvention.StdCall)]
         public static extern int SetWindowsHookEx(int idHook, HookProc lpfn,
             IntPtr hInstance, int threadId);
 
         //Call this function to uninstall the hook.
         [DllImport("user32.dll", CharSet = CharSet.Auto,
-             CallingConvention = CallingConvention.StdCall)]
+            CallingConvention = CallingConvention.StdCall)]
         public static extern bool UnhookWindowsHookEx(int idHook);
 
         //Use this function to pass the hook information to next hook procedure in chain.
         [DllImport("user32.dll", CharSet = CharSet.Auto,
-             CallingConvention = CallingConvention.StdCall)]
+            CallingConvention = CallingConvention.StdCall)]
         public static extern int CallNextHookEx(int idHook, int nCode,
             IntPtr wParam, IntPtr lParam);
 
         //Use this hook to get the module handle, needed for WPF environment
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetModuleHandle(string lpModuleName);
-
-        public enum HookType : int
-        {
-            GlobalKeyboard = 13,
-            GlobalMouse = 14
-        }
 
         public int MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
@@ -69,22 +79,23 @@ namespace Snapper.Util
             using (var currentProcess = Process.GetCurrentProcess())
             using (var mainModule = currentProcess.MainModule)
             {
-
                 if (_hHookMouse == 0)
                 {
                     // Create an instance of HookProc.
-                    MouseHookProcedure = new HookProc(MouseHookProc);
+                    MouseHookProcedure = MouseHookProc;
                     // Create an instance of HookProc.
-                    KbdHookProcedure = new HookProc(KbdHookProc);
+                    KbdHookProcedure = KbdHookProc;
 
                     //register a global hook
-                    _hHookMouse = SetWindowsHookEx((int)HookType.GlobalMouse,
-                                                  MouseHookProcedure,
-                                                  GetModuleHandle(mainModule.ModuleName),
-                                                  0);
+                    _hHookMouse = SetWindowsHookEx((int) HookType.GlobalMouse,
+                        MouseHookProcedure,
+                        GetModuleHandle(mainModule.ModuleName),
+                        0);
+
                     if (_hHookMouse == 0)
                     {
                         Close();
+
                         throw new ApplicationException("SetWindowsHookEx() failed for the mouse");
                     }
                 }
@@ -92,13 +103,15 @@ namespace Snapper.Util
                 if (_hHookKbd == 0)
                 {
                     //register a global hook
-                    _hHookKbd = SetWindowsHookEx((int)HookType.GlobalKeyboard,
-                                                KbdHookProcedure,
-                                                GetModuleHandle(mainModule.ModuleName),
-                                                0);
+                    _hHookKbd = SetWindowsHookEx((int) HookType.GlobalKeyboard,
+                        KbdHookProcedure,
+                        GetModuleHandle(mainModule.ModuleName),
+                        0);
+
                     if (_hHookKbd == 0)
                     {
                         Close();
+
                         throw new ApplicationException("SetWindowsHookEx() failed for the keyboard");
                     }
                 }
@@ -109,33 +122,21 @@ namespace Snapper.Util
         {
             if (_hHookMouse != 0)
             {
-                bool ret = UnhookWindowsHookEx(_hHookMouse);
-                if (ret == false)
-                {
-                    throw new ApplicationException("UnhookWindowsHookEx() failed for the mouse");
-                }
+                var ret = UnhookWindowsHookEx(_hHookMouse);
+
+                if (ret == false) throw new ApplicationException("UnhookWindowsHookEx() failed for the mouse");
+
                 _hHookMouse = 0;
             }
 
             if (_hHookKbd != 0)
             {
-                bool ret = UnhookWindowsHookEx(_hHookKbd);
-                if (ret == false)
-                {
-                    throw new ApplicationException("UnhookWindowsHookEx() failed for the keyboard");
-                }
+                var ret = UnhookWindowsHookEx(_hHookKbd);
+
+                if (ret == false) throw new ApplicationException("UnhookWindowsHookEx() failed for the keyboard");
+
                 _hHookKbd = 0;
             }
         }
-
-        #region IDisposable Members
-
-        public void Dispose()
-        {
-            if (_hHookMouse != 0 || _hHookKbd != 0)
-                Close();
-        }
-
-        #endregion
     }
 }

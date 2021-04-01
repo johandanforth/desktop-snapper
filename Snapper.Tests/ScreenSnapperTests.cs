@@ -5,8 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using Snapper.Util;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using Snapper.Util;
 
 namespace Snapper.Tests
 {
@@ -27,6 +29,7 @@ namespace Snapper.Tests
             var filename = Path.GetTempFileName() + Guid.NewGuid() + ".jpeg";
 
             var bounds = Screen.PrimaryScreen.Bounds;
+
             using (var image = new Bitmap(bounds.Width, bounds.Height, PixelFormat.Format32bppArgb))
             {
                 using (var graphics = Graphics.FromImage(image))
@@ -39,24 +42,23 @@ namespace Snapper.Tests
             //test
             Assert.IsTrue(File.Exists(filename));
             var testImage = Image.FromFile(filename);
-            Assert.IsTrue(testImage.RawFormat.Guid == ImageFormat.Jpeg.Guid, "Wrong format, was " + testImage.RawFormat);
+            Assert.IsTrue(testImage.RawFormat.Guid == ImageFormat.Jpeg.Guid,
+                "Wrong format, was " + testImage.RawFormat);
         }
 
         private static void SaveJpeg(Image image, string filename, int quality)
         {
-
             using (var encoderParams = new EncoderParameters(1))
             {
                 if (!Directory.Exists(Path.GetDirectoryName(filename)))
                     Directory.CreateDirectory(Path.GetDirectoryName(filename));
 
                 encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, quality);
-                var jpegCodec = ImageCodecInfo.GetImageDecoders().FirstOrDefault(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
+                var jpegCodec = ImageCodecInfo.GetImageDecoders()
+                    .FirstOrDefault(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
 
                 image.Save(filename, jpegCodec, encoderParams);
             }
         }
-
-
     }
 }

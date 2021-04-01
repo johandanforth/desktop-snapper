@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
-using Application = Microsoft.Office.Interop.Outlook.Application;
+using Microsoft.Office.Interop.Outlook;
 
 namespace OutlookAddIn1
 {
@@ -11,10 +11,9 @@ namespace OutlookAddIn1
     {
         public static Application _application;
 
-
-        private void ThisAddIn_Startup(object sender, System.EventArgs e)
+        private void ThisAddIn_Startup(object sender, EventArgs e)
         {
-            _application = this.Application;
+            _application = Application;
 
             var processName = Process.GetCurrentProcess().ProcessName;
             Debug.Print("Starting adddin from " + processName);
@@ -28,15 +27,15 @@ namespace OutlookAddIn1
             myProcess.Start();
         }
 
-        private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
+        private void ThisAddIn_Shutdown(object sender, EventArgs e)
         {
         }
 
         #region VSTO generated code
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        ///     Required method for Designer support - do not modify
+        ///     the contents of this method with the code editor.
         /// </summary>
         private void InternalStartup()
         {

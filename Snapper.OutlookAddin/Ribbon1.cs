@@ -2,11 +2,11 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Windows;
-using Snapper;
+
 using Microsoft.Office.Interop.Outlook;
 using Microsoft.Office.Tools.Ribbon;
+
+using Snapper;
 
 namespace OutlookAddIn1
 {
@@ -14,12 +14,12 @@ namespace OutlookAddIn1
     {
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
-
         }
 
         private void PlayerButtonClick(object sender, RibbonControlEventArgs e)
         {
             var calendarView = ThisAddIn._application.ActiveExplorer().CurrentView as _CalendarView;
+
             if (calendarView != null)
             {
                 var dateString = calendarView.SelectedStartTime.ToString("yyyy-MM-dd");
@@ -31,7 +31,6 @@ namespace OutlookAddIn1
 
         private void SettingsButtonClick(object sender, RibbonControlEventArgs e)
         {
-
             foreach (var process in Process.GetProcessesByName("Snapper"))
             {
                 Debug.Print("Killing " + process.ProcessName);
@@ -40,7 +39,7 @@ namespace OutlookAddIn1
 
             var processName = Process.GetCurrentProcess().ProcessName;
             Debug.Print("Starting adddin from " + processName);
-            
+
             var addinAssembly = Assembly.GetExecutingAssembly();
             var asmPath = Path.GetDirectoryName(addinAssembly.CodeBase);
             var path = new Uri(asmPath + "/Snapper.exe");
@@ -49,6 +48,5 @@ namespace OutlookAddIn1
             myProcess.StartInfo.Arguments = "/show /host:" + processName;
             myProcess.Start();
         }
-
     }
 }

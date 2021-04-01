@@ -11,9 +11,9 @@ namespace Snapper.Util
 {
     public class ScreenSnapper : IScreenSnapper
     {
-        private string _imagePath;
         private Rectangle _bounds;
         private ImageFormat _imageFormat;
+        private string _imagePath;
         private long _quality;
 
         public void SnapScreenAndSave(string imagePath, Screen screen, ImageFormat imageFormat, long qualityPercent)
@@ -24,20 +24,7 @@ namespace Snapper.Util
             _imageFormat = imageFormat;
             _quality = qualityPercent;
 
-            var snapperThread = new Thread(SnapAndSaveByBounds) { Priority = ThreadPriority.Lowest };
-            snapperThread.Start();
-        }
-
-        public void SnapAllScreensAndSave(string imagePath, ImageFormat imageFormat, int qualityPercent)
-        {
-            var bounds = new Rectangle(SystemInformation.VirtualScreen.X, SystemInformation.VirtualScreen.Y, 
-                SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height);
-            _bounds = bounds;
-            _imagePath = imagePath;
-            _imageFormat = imageFormat;
-            _quality = qualityPercent;
-
-            var snapperThread = new Thread(SnapAndSaveByBounds) { Priority = ThreadPriority.Lowest };
+            var snapperThread = new Thread(SnapAndSaveByBounds) {Priority = ThreadPriority.Lowest};
             snapperThread.Start();
         }
 
@@ -50,9 +37,22 @@ namespace Snapper.Util
             _imageFormat = imageFormat;
             _quality = qualityPercent;
 
-            Debug.Print("Snapped - " + activeWindowInfo.ActiveProgramTitle );
+            Debug.Print("Snapped - " + activeWindowInfo.ActiveProgramTitle);
 
-            var snapperThread = new Thread(SnapAndSaveByBounds) { Priority = ThreadPriority.Lowest };
+            var snapperThread = new Thread(SnapAndSaveByBounds) {Priority = ThreadPriority.Lowest};
+            snapperThread.Start();
+        }
+
+        public void SnapAllScreensAndSave(string imagePath, ImageFormat imageFormat, int qualityPercent)
+        {
+            var bounds = new Rectangle(SystemInformation.VirtualScreen.X, SystemInformation.VirtualScreen.Y,
+                SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height);
+            _bounds = bounds;
+            _imagePath = imagePath;
+            _imageFormat = imageFormat;
+            _quality = qualityPercent;
+
+            var snapperThread = new Thread(SnapAndSaveByBounds) {Priority = ThreadPriority.Lowest};
             snapperThread.Start();
         }
 
@@ -64,7 +64,8 @@ namespace Snapper.Util
                 {
                     try
                     {
-                        graphics.CopyFromScreen(_bounds.X, _bounds.Y, 0, 0, _bounds.Size, CopyPixelOperation.SourceCopy);
+                        graphics.CopyFromScreen(_bounds.X, _bounds.Y, 0, 0, _bounds.Size,
+                            CopyPixelOperation.SourceCopy);
                         SaveJpeg(image);
                     }
                     catch (Exception snapException)
@@ -95,14 +96,14 @@ namespace Snapper.Util
 
                 try
                 {
-                    var jpegCodec = ImageCodecInfo.GetImageDecoders().FirstOrDefault(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
+                    var jpegCodec = ImageCodecInfo.GetImageDecoders()
+                        .FirstOrDefault(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
 
                     var filename = _imagePath + "/" + DateTime.Now.ToString("HH-mm-ss") + "." + _imageFormat;
                     image.Save(filename, jpegCodec, encoderParams);
                 }
                 catch (Exception saveException)
                 {
-
                     //todo: handle exception?
                     /*
                     var eventLog = new EventLog { Source = "Snapper" };
@@ -112,6 +113,5 @@ namespace Snapper.Util
                 }
             }
         }
-
     }
 }

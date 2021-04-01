@@ -8,16 +8,16 @@ namespace Snapper.Util
     public class WindowFuncs
     {
         [DllImport("user32.dll")]
-        static extern IntPtr GetForegroundWindow();
+        private static extern IntPtr GetForegroundWindow();
 
         [DllImport("user32.dll")]
-        static extern int GetWindowTextLength(IntPtr hWnd);
+        private static extern int GetWindowTextLength(IntPtr hWnd);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
 
         [DllImport("user32.dll")]
-        static extern int GetWindowRect(IntPtr hWnd, out Rect rect);
+        private static extern int GetWindowRect(IntPtr hWnd, out Rect rect);
 
         public ActiveWindowInfo GetActiveWindow()
         {
@@ -30,11 +30,11 @@ namespace Snapper.Util
 
             var bounds = new Rectangle(rect.Left, rect.Top, rect.Width, rect.Height);
 
-            return new ActiveWindowInfo()
-                       {
-                           ActiveProgramTitle = sb.ToString(),
-                           Bounds = bounds
-                       };
+            return new ActiveWindowInfo
+            {
+                ActiveProgramTitle = sb.ToString(),
+                Bounds = bounds
+            };
         }
     }
 }

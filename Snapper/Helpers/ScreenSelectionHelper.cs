@@ -7,11 +7,11 @@ namespace Snapper.Helpers
         public static IEnumerable<string> GetScreenSelection()
         {
             var list = new List<string>
-                           {
-                               "Primary Screen",
-                               "All Screens",
-                               "Active Window"
-                           };
+            {
+                "Primary Screen",
+                "All Screens",
+                "Active Window"
+            };
 
             return list;
         }

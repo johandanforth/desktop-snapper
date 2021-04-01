@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Snapper.PlayBackWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="desktop snapper - what did I do back then?" Height="396" Width="687" SizeChanged="WindowSizeChanged" Loaded="WindowLoaded">
+        Title="desktop snapper - what did I do back then?" Height="396" Width="687" SizeChanged="WindowSizeChanged"
+        Loaded="WindowLoaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -13,14 +14,15 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" >
-            <Calendar Name="MyCalendar" Margin="5" IsTodayHighlighted="False" SelectedDatesChanged="MyCalendarSelectedDatesChanged"></Calendar>
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
+            <Calendar Name="MyCalendar" Margin="5" IsTodayHighlighted="False"
+                      SelectedDatesChanged="MyCalendarSelectedDatesChanged" />
             <TextBlock TextWrapping="Wrap" Margin="5,50,5,5" Width="200">
                 Press left mousekey and drag along the activity-bar at the bottom to see what you did at a specific time.
             </TextBlock>
             <StackPanel Orientation="Horizontal">
                 <Label Name="DirInfo">[snapper-dir]</Label>
-                <Image Source="Icons/folder.png" MouseLeftButtonUp="FolderClick"></Image>
+                <Image Source="Icons/folder.png" MouseLeftButtonUp="FolderClick" />
             </StackPanel>
 
         </StackPanel>
@@ -29,8 +31,9 @@
             <Label Name="Time2" FontSize="40" Foreground="Black">00:00</Label>
             <Label Name="Time1" FontSize="40" Foreground="Chartreuse">00:00</Label>
         </Grid>
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" >
-            <Canvas Name="Slots" Background="Beige" Height="40" ToolTip="This is the activity-bar, blue parts indicate 'action' took place" />
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+            <Canvas Name="Slots" Background="Beige" Height="40"
+                    ToolTip="This is the activity-bar, blue parts indicate 'action' took place" />
         </StackPanel>
 
     </Grid>

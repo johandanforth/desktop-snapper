@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -12,11 +11,13 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
+
 using Microsoft.Win32;
+
 using Snapper.Extensions;
 using Snapper.Properties;
 using Snapper.Util;
-using Application = System.Windows.Application;
+
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using MessageBox = System.Windows.MessageBox;
 
@@ -39,13 +40,13 @@ namespace Snapper
             Loaded += WindowLoaded;
 
             var iconHandle = Properties.Resources.systray.Handle;
-            
+
             _notifyIcon = new NotifyIcon
-                {
-                    Icon = System.Drawing.Icon.FromHandle(iconHandle),
-                    Visible = true,
-                    Text = "desktop-snapper"
-                };
+            {
+                Icon = System.Drawing.Icon.FromHandle(iconHandle),
+                Visible = true,
+                Text = "desktop-snapper"
+            };
 
             _notifyIcon.DoubleClick += (s, a) =>
             {
@@ -189,6 +190,7 @@ namespace Snapper
             {
                 case Key.Escape:
                     WindowState = WindowState.Minimized;
+
                     return;
             }
         }
@@ -264,10 +266,12 @@ namespace Snapper
                         Show();
                         Focus();
                         Activate();
+
                         break;
                     case "/minimized":
                         WindowState = WindowState.Minimized;
                         Hide();
+
                         break;
                 }
 

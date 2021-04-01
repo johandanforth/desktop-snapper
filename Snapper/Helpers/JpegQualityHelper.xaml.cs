@@ -10,5 +10,4 @@ namespace Snapper.Helpers
                 yield return i;
         }
     }
-
 }
