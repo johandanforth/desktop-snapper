@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Snapper.PlayBackWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="desktop snapper - what did I do back then?" Height="396" Width="687" SizeChanged="WindowSizeChanged"
+        Title="desktop snapper - what did I do back then?" 
+        Height="600" Width="1000" SizeChanged="WindowSizeChanged"
         Loaded="WindowLoaded">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,26 +15,44 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
-            <Calendar Name="MyCalendar" Margin="5" IsTodayHighlighted="False"
-                      SelectedDatesChanged="MyCalendarSelectedDatesChanged" />
-            <TextBlock TextWrapping="Wrap" Margin="5,50,5,5" Width="200">
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" Width="250">
+            <Viewbox>
+                <Calendar Name="MyCalendar" Margin="5"
+                      
+                      SelectedDatesChanged="MyCalendarSelectedDatesChanged" 
+                      DisplayDateChanged="MyCalendar_DisplayDateChanged" />
+            </Viewbox>
+            <TextBlock TextWrapping="Wrap" Margin="5,50,5,5" >
                 Press left mousekey and drag along the activity-bar at the bottom to see what you did at a specific time.
             </TextBlock>
             <StackPanel Orientation="Horizontal">
-                <Label Name="DirInfo">[snapper-dir]</Label>
-                <Image Source="Icons/folder.png" MouseLeftButtonUp="FolderClick" />
+                <Label Margin="0 10 " Name="DirInfo" Padding="8">[snapper-dir]</Label>
+                <Button Click="FolderClick" Padding="4" >
+                    Change Directory
+                    <!--<StackPanel>
+                        <Image Source="Icons/folder.png"  />
+                    </StackPanel>-->
+                </Button>
+
             </StackPanel>
 
         </StackPanel>
-        <Grid Name="SnapshotGrid" Grid.Column="1">
+        <Grid Grid.Row="0" Name="SnapshotGrid" Grid.Column="1">
             <Image Name="Snapshot" />
-            <Label Name="Time2" FontSize="40" Foreground="Black">00:00</Label>
-            <Label Name="Time1" FontSize="40" Foreground="Chartreuse">00:00</Label>
+            <Label Name="Date2" FontFamily="Consolas" Margin="0 0 0 0" FontSize="35" Foreground="Black">2021-01-01</Label>
+            <Label Name="Date1" FontFamily="Consolas" Margin="1 1 0 0" FontSize="35" Foreground="Chartreuse">2021-01-01</Label>
+            <Label Name="Time2" FontFamily="Consolas" Margin="220 0 0 0" FontSize="35" Foreground="Black">00:00</Label>
+            <Label Name="Time1" FontFamily="Consolas" Margin="221 1 0 0" FontSize="35" Foreground="Chartreuse">00:00</Label>
         </Grid>
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+        <StackPanel Name="SlotPanel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <Canvas Name="Slots" Background="Beige" Height="40"
                     ToolTip="This is the activity-bar, blue parts indicate 'action' took place" />
+            <!--<Slider Margin="0 -40 0 0" Background="Transparent" Height="20" Name="SlotSlider" 
+                    ValueChanged="SlotSlider_OnValueChanged">
+                <Slider.LayoutTransform>
+                    <ScaleTransform ScaleY="2"></ScaleTransform>
+                </Slider.LayoutTransform>
+            </Slider>-->
         </StackPanel>
 
     </Grid>

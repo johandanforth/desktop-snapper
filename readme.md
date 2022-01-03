@@ -31,3 +31,8 @@ The "player" allows you to select a date and "play back" the snaps taken that da
 The "action bar" at the bottom displays blue areas where you were active and
 screenshots were taken:
 ![player!](images/player.png "player")
+
+**TODO**
+
+- In the player dialog, the screen should be cleared when selecting a new date that is empty
+- 
