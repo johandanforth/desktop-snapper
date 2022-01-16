@@ -17,21 +17,22 @@
 
         <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" Width="250">
             <Viewbox>
-                <Calendar Name="MyCalendar" Margin="5"
-                      
+                <Calendar Name="MyCalendar" Margin="4"
                       SelectedDatesChanged="MyCalendarSelectedDatesChanged" 
                       DisplayDateChanged="MyCalendar_DisplayDateChanged" />
             </Viewbox>
-            <TextBlock TextWrapping="Wrap" Margin="5,50,5,5" >
-                Press left mousekey and drag along the activity-bar at the bottom to see what you did at a specific time.
+            <TextBlock TextWrapping="Wrap" Margin="8" >
+                Press <Bold>Left Mousekey</Bold> and drag along the <Bold>activity-bar</Bold> at the bottom
+                to see what you did at a specific time.
             </TextBlock>
-            <StackPanel Orientation="Horizontal">
-                <Label Margin="0 10 " Name="DirInfo" Padding="8">[snapper-dir]</Label>
-                <Button Click="FolderClick" Padding="4" >
-                    Change Directory
-                    <!--<StackPanel>
-                        <Image Source="Icons/folder.png"  />
-                    </StackPanel>-->
+            <StackPanel Orientation="Vertical">
+                <Label Margin="4" >Saving snaps to:</Label>
+                <Label Margin="4" Name="DirInfo" >[snapper-dir]</Label>
+                <Button Margin="4" Click="FolderClick" Padding="8">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="32" Source="/Icons/folder.png"></Image>
+                        <Label VerticalAlignment="Center" >Change Snap-Folder</Label>
+                    </StackPanel>
                 </Button>
 
             </StackPanel>
@@ -39,10 +40,12 @@
         </StackPanel>
         <Grid Grid.Row="0" Name="SnapshotGrid" Grid.Column="1">
             <Image Name="Snapshot" />
-            <Label Name="Date2" FontFamily="Consolas" Margin="0 0 0 0" FontSize="35" Foreground="Black">2021-01-01</Label>
-            <Label Name="Date1" FontFamily="Consolas" Margin="1 1 0 0" FontSize="35" Foreground="Chartreuse">2021-01-01</Label>
-            <Label Name="Time2" FontFamily="Consolas" Margin="220 0 0 0" FontSize="35" Foreground="Black">00:00</Label>
-            <Label Name="Time1" FontFamily="Consolas" Margin="221 1 0 0" FontSize="35" Foreground="Chartreuse">00:00</Label>
+            <Grid HorizontalAlignment="Center">
+                <Label Name="Date2" FontFamily="Consolas" Margin="0 0 0 0" FontSize="35" Foreground="Black">2021-01-01</Label>
+                <Label Name="Date1" FontFamily="Consolas" Margin="1 1 0 0" FontSize="35" Foreground="Chartreuse">2021-01-01</Label>
+                <Label Name="Time2" FontFamily="Consolas" Margin="220 0 0 0" FontSize="35" Foreground="Black">00:00</Label>
+                <Label Name="Time1" FontFamily="Consolas" Margin="221 1 0 0" FontSize="35" Foreground="Chartreuse">00:00</Label>
+            </Grid>
         </Grid>
         <StackPanel Name="SlotPanel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <Canvas Name="Slots" Background="Beige" Height="40"
