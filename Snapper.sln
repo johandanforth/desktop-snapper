@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32104.313
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snapper", "Snapper\Snapper.csproj", "{87026312-E82C-4CD2-B6DB-D7B47AF55EC4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snapper.Addin", "Snapper.OutlookAddin\Snapper.Addin.csproj", "{FB03CEB2-4C96-4803-AD2A-7839E26046F6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snapper.Tests", "Snapper.Tests\Snapper.Tests.csproj", "{B1003B53-9F94-4727-8D4A-293C021FEC0F}"
 EndProject
@@ -28,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{92F4
 		kill-snapper.cmd = kill-snapper.cmd
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snapper.Addin", "Snapper.OutlookAddin\Snapper.Addin.csproj", "{FB03CEB2-4C96-4803-AD2A-7839E26046F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,14 +44,6 @@ Global
 		{87026312-E82C-4CD2-B6DB-D7B47AF55EC4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87026312-E82C-4CD2-B6DB-D7B47AF55EC4}.Release|x86.ActiveCfg = Release|x86
 		{87026312-E82C-4CD2-B6DB-D7B47AF55EC4}.Release|x86.Build.0 = Release|x86
-		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Debug|x86.Build.0 = Debug|Any CPU
-		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Release|x86.ActiveCfg = Release|Any CPU
-		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Release|x86.Build.0 = Release|Any CPU
 		{B1003B53-9F94-4727-8D4A-293C021FEC0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B1003B53-9F94-4727-8D4A-293C021FEC0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1003B53-9F94-4727-8D4A-293C021FEC0F}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -68,6 +60,14 @@ Global
 		{6D88AA91-F558-4A26-9C3F-A977E6B8189E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D88AA91-F558-4A26-9C3F-A977E6B8189E}.Release|x86.ActiveCfg = Release|Any CPU
 		{6D88AA91-F558-4A26-9C3F-A977E6B8189E}.Release|x86.Build.0 = Release|Any CPU
+		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Debug|x86.Build.0 = Debug|Any CPU
+		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB03CEB2-4C96-4803-AD2A-7839E26046F6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

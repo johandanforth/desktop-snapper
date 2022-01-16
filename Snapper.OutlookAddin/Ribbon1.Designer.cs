@@ -55,14 +55,14 @@
             // 
             this.timeReportGroup.Items.Add(this.PlayerButton);
             this.timeReportGroup.Items.Add(this.SettingsButton);
-            this.timeReportGroup.Label = "desktop-snapper";
+            this.timeReportGroup.Label = "Desktop Snapper";
             this.timeReportGroup.Name = "timeReportGroup";
             // 
             // PlayerButton
             // 
             this.PlayerButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.PlayerButton.Image = ((System.Drawing.Image)(resources.GetObject("PlayerButton.Image")));
-            this.PlayerButton.Label = "What did I do?";
+            this.PlayerButton.Label = "What Did I Do This Day?";
             this.PlayerButton.Name = "PlayerButton";
             this.PlayerButton.ScreenTip = "Show what you did at the selected calendar date";
             this.PlayerButton.ShowImage = true;
@@ -71,7 +71,7 @@
             // SettingsButton
             // 
             this.SettingsButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.SettingsButton.Label = "Settings";
+            this.SettingsButton.Label = "Desktop Snapper Settings";
             this.SettingsButton.Name = "SettingsButton";
             this.SettingsButton.OfficeImageId = "ControlsGallery";
             this.SettingsButton.ScreenTip = "Settings for desktop-snapper";

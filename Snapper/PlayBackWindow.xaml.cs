@@ -102,17 +102,23 @@ namespace Snapper
 
             SelectedDateString = MyCalendar.SelectedDate.Value.ToString("yyyy-MM-dd");
 
+            ShowSelectedDate();
+        }
+
+        private void ShowSelectedDate()
+        {
             LoadImages();
             DrawSlots();
 
-            if(_images == null || !_images.Any())
+            if (_images == null || !_images.Any())
             {
                 Trace.TraceInformation("Nothing snapped this day");
                 Snapshot.Source = null;
             }
             else
             {
-                ShowImage(_images[0]);
+                Trace.TraceInformation($"Showing first image of the day: {_images.First()}");
+                ShowImage(_images.First());
             }
         }
 
@@ -245,9 +251,6 @@ namespace Snapper
             if(_lastImage != null)
                 _lastImage.Dispose();
 
-            //Time1.Margin = new Thickness(SnapshotGrid.ActualWidth / 2 - Time1.ActualWidth / 2, 5, 5, 5);
-            //Time2.Margin = new Thickness(SnapshotGrid.ActualWidth / 2 - Time1.ActualWidth / 2 + 1, 6, 5, 5);
-
             var filename = Path.GetFileNameWithoutExtension(file);
             if(filename != null)
                 Time1.Content = filename.Replace("-", ":");
@@ -366,5 +369,10 @@ namespace Snapper
         //    //});
 
         //}
+        public void ShowDate(string dateString)
+        {
+            SelectedDateString = dateString;
+            ShowSelectedDate();
+        }
     }
 }
